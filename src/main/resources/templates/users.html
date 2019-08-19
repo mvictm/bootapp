@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Welcome</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="my-5">Users</h3>
+            <table th:border="1" class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="personH2 : ${persons}">
+                    <td th:utext="${personH2.id}"><i></i></td>
+                    <td th:utext="${personH2.name}"></td>
+                    <td th:utext="${personH2.email}"></td>
+                    <td><a th:href="@{/edit/{id}(id=${personH2.id})}" class="btn btn-primary"><i
+                            class="fas fa-user-edit ml-2">Edit personH2</i></a></td>
+                    <td><a th:href="@{/delete/{id}(id=${personH2.id})}" class="btn btn-danger"><i
+                            class="fas fa-user-times ml-2">Delete personH2</i></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <h3 class="my-5">Add user</h3>
+        <div class="row">
+            <form th:action="@{/add}" method="post" enctype="multipart/form-data">
+                <div class="form-group col-md-6">
+                    <input type="text" name="name" placeholder="'Enter name'">
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="email" name="email" placeholder="'Enter email'">
+                </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+            </form>
+            <p th:utext="${error}" class="text-danger"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

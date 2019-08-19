@@ -1,0 +1,54 @@
+app:
+  path: PATH_TO_DATE.CSV
+  cronExpression: 0 0 17 ? * MON-FRI *
+server:
+  port: 8080
+
+################################
+#Config for email              #
+################################
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: YOUR_EMAIL
+    password: YOUR_PASSWORD
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          starttls:
+            enable: true
+            required: true
+            socketFactory:
+              port: 465
+              class: javax.net.ssl.SSLSocketFactory
+        auth: true
+        connectiontimeout: 5000
+        timeout: 5000
+        writetimeout: 5000
+
+  ################################
+  # Config for database H2       #
+  ################################
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    initialization-mode: always
+
+  ################################
+  # Config for database MongoDB  #
+  ################################
+  data:
+    mongodb:
+      database: YOUR_DATABASE
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+      dialect: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
